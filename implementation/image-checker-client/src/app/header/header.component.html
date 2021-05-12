@@ -1,0 +1,32 @@
+<mat-toolbar class="header-container" color="primary">
+  <mat-toolbar-row>
+    <span class="logo">
+      <a href="">
+        <img src="../../assets/images/android-chrome-512x512-white.png" alt="ImageChecker">
+      </a>
+    </span>
+    &nbsp;&nbsp;
+    <span>Image Checker</span>
+    <!--<div *ngIf="loggedIn">
+      &nbsp;&nbsp;
+      <button mat-button style="color: white;" routerLink="/registerImage">Register Image</button>
+    </div>-->
+    <span class="spacer"></span>
+    <div *ngIf="loggedIn">
+      <button mat-button [mat-menu-trigger-for]="menu" style="color: white;"><mat-icon>account_box</mat-icon>&nbsp;{{profile?.name}}</button>
+      <mat-menu #menu="matMenu">
+        <button mat-button (click)="doLogout()" style="width: 100%">Log Out</button>
+        <button mat-button (click)="resetPassword()" style="width: 100%">Password Reset</button>
+        <button mat-button (click)="editProfile()" style="width: 100%">Edit Profile</button>
+      </mat-menu>
+    </div>
+    <div *ngIf="!loggedIn">
+      <button mat-button style="color: white" (click)="doLogin()">Log In</button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<nav mat-tab-nav-bar>
+  <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive" [disabled]="link.disabled ? !loggedIn : link.disabled">
+    {{link.label}}
+  </a>
+</nav>

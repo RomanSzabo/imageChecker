@@ -1,0 +1,60 @@
+<app-header></app-header>
+<div class="home-container">
+  <div class="cards-container">
+    <mat-card style="margin-bottom: 50px">
+      <mat-card-header>
+        <mat-card-title>
+          Image Handling
+        </mat-card-title>
+      </mat-card-header>
+      <div style="text-align: right;">
+        <img class="image" src="assets/images/image-handling.png" alt="imageHandling"/>
+      </div>
+      <mat-card-content style="text-align: left">
+        Image handling functionality. Please choose service: <br>
+        Click <b>Check Image</b> to compare your image against already registered images, obtain similarity report.<br>
+        Click <b>Register Image</b> to register your image in system.
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-stroked-button color="primary" routerLink="/checkImage">Check Image</button>
+        <button mat-stroked-button color="primary" routerLink="/registerImage">Register Image</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card style="margin-bottom: 50px">
+      <mat-card-header>
+        <mat-card-title>
+          Messaging
+        </mat-card-title>
+      </mat-card-header>
+      <div style="text-align: right;">
+        <img class="image" src="assets/images/messaging.png" alt="messaging"/>
+      </div>
+      <mat-card-content style="text-align: left;">
+        Functionality to contact image owner or be contacted as image owner.<br>
+        Here is collection of all received contact requests.
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-stroked-button color="primary" (click)="openDialog()">Inbox</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card style="margin-bottom: 50px">
+      <mat-card-header>
+        <mat-card-title>
+          Account Options
+        </mat-card-title>
+      </mat-card-header>
+      <div style="text-align: right;">
+        <img class="image" src="assets/images/account.png" alt="account"/>
+      </div>
+      <mat-card-content style="text-align: left">
+        Account Management: <br>
+        Click <b>Change Password</b> to change your password.<br>
+        Click <b>Account Settings</b> to change your account settings.
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-stroked-button color="primary" (click)="resetPassword()">Change Password</button>
+        <button mat-stroked-button color="primary" (click)="editProfile()">Account Settings</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

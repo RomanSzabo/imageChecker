@@ -1,0 +1,103 @@
+<app-header></app-header>
+<div class="check-container">
+  <h2>Similarity Report for Image</h2>
+  <div class="card-container">
+    <mat-card>
+      <div id="loading-overlay" *ngIf="loading">
+        <mat-spinner class="spinner"></mat-spinner>
+      </div>
+      <mat-card-header>
+        <form [formGroup]="uploadForm" (ngSubmit)="onSubmit(uploadForm.value)" class="inputForm">
+          <mat-form-field>
+            <ngx-mat-file-input formControlName="image" placeholder="Image"></ngx-mat-file-input>
+            <mat-icon matSuffix>insert_photo</mat-icon>
+          </mat-form-field>
+          &nbsp;
+          <button mat-stroked-button color="primary" type="submit">
+            <mat-icon style="vertical-align: middle">check_circle_outline</mat-icon>&nbsp;Check
+          </button>
+        </form>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <br>
+        <h3 align="left">Similarity Check Results <mat-icon style="vertical-align: center; font-size: 15px" color="primary" matTooltip="Image Check Thresholds:&#13;Features > 0.8 or Histogram > 0.9 and Features > 0.6">help</mat-icon></h3>
+          <div *ngIf="similarityReport?.passed">
+            <p align="left">
+              <mat-icon style="color: green; vertical-align: middle;">verified</mat-icon>
+              Image has passed similarity check - no similar images found
+            </p>
+          </div>
+          <div *ngIf="similarityReport?.passed === false">
+            <p align="left">
+              <mat-icon style="color: red; vertical-align: middle;">new_releases</mat-icon>
+              Image has failed similarity check - similar images found
+            </p>
+            <div *ngIf="!isLoggedIn()">
+              <p align="left">
+                <mat-icon color="primary" style="vertical-align: middle;font-size: 20px">info</mat-icon>
+                <i><b>Pro Tip: </b>Log In or Sign Up to see more detailed report.</i>
+              </p>
+            </div>
+          </div>
+        <div *ngIf="similarityReport === undefined">
+          <p align="left">
+            <mat-icon color="primary" style="vertical-align: middle;font-size: 20px">info</mat-icon>
+            <i><b>Pro Tip: </b>Select image and click submit in form above to see results.</i>
+          </p>
+        </div>
+      <mat-divider></mat-divider>
+      <br>
+        <div *ngIf="similarityReport?.tampered">
+          <p align="left">
+            <mat-icon style="vertical-align: middle;font-size: 20px;color: orange">warning</mat-icon>
+            <b>Warning: </b>At least one picture in system has not passed integrity check. Administrators has been notified.
+          </p>
+        </div>
+        <div *ngIf="similarityReport?.checkResultsList.length > 0">
+          <h3 align="left">Details results per similar image</h3>
+          <mat-accordion class="example-headers-align">
+            <mat-expansion-panel *ngFor="let checkResult of similarityReport?.checkResultsList">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{checkResult.imageName}}
+                </mat-panel-title>
+                <mat-panel-description>
+                  Owner: {{checkResult.owner}}
+                  <div *ngIf="checkResult.tampered">
+                    <mat-icon style="color: red" matTooltip="Integrity check of image failed. Possible alteration of stored data. Administrators are have been informed.">error</mat-icon>
+                  </div>
+                  <div *ngIf="!checkResult.tampered">
+                    <mat-icon style="color: green" matTooltip="Integrity check of image passed.">check_circle</mat-icon>
+                  </div>
+                  <div *ngIf="isFastCheck">
+                    <mat-icon style="color: orange" matTooltip="Integrity check was not performed. Integrity check is only for logged in users.">warning</mat-icon>
+                  </div>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p align="left">
+                <b>Similarity in features: </b>{{checkResult.keyPointSimilarity}}<br>
+                <b>Similarity in color histogram: </b>{{checkResult.histogramSimilarity}}<br>
+                <b>Similarity in metadata: </b>{{checkResult.metadataSimilarity}}<br>
+              </p>
+              <button mat-stroked-button [disabled]="loadingButton" color="primary" style="width: 100%" (click)="openDialog(checkResult.imageId, checkResult.ownerId, checkResult.imageName, checkResult.owner)"><mat-icon>mail</mat-icon>&nbsp;Contact Owner</button>
+              <table mat-table [dataSource]="checkResult.table" class="table">
+                <ng-container matColumnDef="key" style="max-width: 50%">
+                  <th mat-header-cell *matHeaderCellDef>Key</th>
+                  <td mat-cell *matCellDef="let element">{{element.key}}</td>
+                </ng-container>
+                <ng-container matColumnDef="value">
+                  <th mat-header-cell *matHeaderCellDef>Value</th>
+                  <td mat-cell *matCellDef="let element">{{element.value}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

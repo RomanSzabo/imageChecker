@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="welcome-container">
+  <img src="assets/images/logo-via-logohub.png" alt="Image Checker">
+  <h2>Welcome to Image Checker Project</h2>
+  <div class="text-container">
+    <h3>Usage</h3>
+    <p>
+      "Fast Check" is available publicly (Just stating if similar image is found or not, not performing integrity check).
+      To use other functionalities like registration, detailed comparison of the system, please log in or create a new account.
+    </p>
+    <br>
+    <button mat-stroked-button color="primary" (click)="doLogin()">Log In or Sign Up</button>
+    <br>
+    <br>
+    <h3>About</h3>
+    <p>
+      Image Checker is a course project aiming at providing suitable, user-friendly and effective way of checking for
+      duplicate images.
+      The crucial part is storage of needed data. Since individual images are rather large in size, storing of so called
+      key points of the
+      image provides a mean to save only small portion of data which describes needed pieces to compare 2 images.
+    </p>
+  </div>
+</div>

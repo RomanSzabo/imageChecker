@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="about-container">
+  <img src="assets/images/logo-via-logohub.png" alt="Image Checker">
+  <h2>Welcome to Image Checker Project</h2>
+  <div class="text-container">
+    <h3>Usage</h3>
+    <p>
+      Self explaining, upload image to respective fields. For Registering, automatic load of data is performed, after click on register, registration is performed <br>
+      To Check image, just select it and click on check, results will appear bellow select box.
+    </p>
+    <br>
+    <h3>Documentation</h3>
+    <p>
+      Git Repository: <a href="https://github.com/RomanSzabo/imageChecker">https://github.com/RomanSzabo/imageChecker</a>
+      Rest API: <a href="">Swagger Documentation</a> <br>
+      To authorize in Swagger for try-out functionality, you need to have a token. It can be obtained here:<br><br>
+      <button mat-stroked-button color="primary" (click)="this.openDialog()" [disabled]="!isLoggedIn()">Get Token</button>
+    </p>
+    <br>
+    <br>
+    <h3>About</h3>
+    <p>
+      Image Checker is a course project aiming at providing suitable, user-friendly and effective way of checking for
+      duplicate images.
+      The crucial part is storage of needed data. Since individual images are rather large in size, storing of so called
+      key points of the
+      image provides a mean to save only small portion of data which describes needed pieces to compare 2 images.
+    </p>
+  </div>
+</div>

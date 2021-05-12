@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Image Checker Notification</h1>
+Dear <span th:text="${sender}"></span>
+<p>Your contact request was send successfully.</p>
+<hr>
+<b>For image:</b> <span th:text="${image}"></span><br/>
+<b>To:</b>
+<span th:text="${user}"></span>
+<br/>
+<b>Message</b>
+<p th:text="${text}"></p>
+<hr>
+<p><i>Best regards, <br/>ImageChecker Notification Service</i><br/></p>
+<img src="cid:logo.png"  alt="logo"/>
+<br/>
+<i style="font-size: 10px">Note: Replies to this address are not read.</i>
+</body>
+</html>
